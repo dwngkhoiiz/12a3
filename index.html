@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f0e7">
+  <meta name="description" content="12A3 – THPT Ba Vì | Thanh xuân của chúng ta">
+  <title>12A3 – Thanh xuân của chúng ta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f6f0e7;
+      --ink: #292820;
+      --muted: #777265;
+      --accent: #b77b42;
+      --line: rgba(55, 48, 37, .16);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 10% 5%, rgba(220,190,145,.22), transparent 34rem),
+        var(--paper);
+      font-family: "DM Sans", sans-serif;
+    }
+    .page { min-height: 100vh; padding: 26px clamp(18px, 5vw, 76px) 34px; }
+    .topline {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--line); padding-bottom: 16px;
+      color: var(--muted); font-size: 12px; letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .topline strong { color: var(--ink); font-weight: 700; }
+    .hero { max-width: 1440px; margin: 0 auto; }
+    .intro { text-align: center; padding: clamp(44px, 8vh, 86px) 12px 38px; }
+    .eyebrow {
+      color: var(--accent); text-transform: uppercase; letter-spacing: .28em;
+      font-size: 11px; font-weight: 700;
+    }
+    h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(54px, 10vw, 128px); line-height: .98;
+      letter-spacing: -.055em; margin: 18px 0 12px; font-weight: 600;
+    }
+    .school { font-size: clamp(14px, 2vw, 19px); letter-spacing: .18em; text-transform: uppercase; }
+    .slogan {
+      margin: 22px 0 0; font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(20px, 3vw, 34px); font-style: italic; color: #8b623e;
+    }
+    .photos {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+      max-width: 1240px; margin: 0 auto;
+    }
+    .photo {
+      position: relative; overflow: hidden; border-radius: 5px;
+      background: #ded4c5; box-shadow: 0 18px 50px rgba(51, 41, 26, .12);
+      isolation: isolate;
+    }
+    .photo:first-child { transform: translateY(22px); }
+    .photo img {
+      display: block; width: 100%; height: clamp(260px, 39vw, 520px);
+      object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1);
+    }
+    .photo:hover img { transform: scale(1.035); }
+    .photo::after {
+      content: ""; position: absolute; inset: 45% 0 0;
+      background: linear-gradient(transparent, rgba(22,20,17,.48)); z-index: 1;
+      pointer-events: none;
+    }
+    .photo-label {
+      position: absolute; z-index: 2; left: 22px; bottom: 18px;
+      color: white; font-size: 12px; letter-spacing: .14em;
+      text-transform: uppercase; text-shadow: 0 1px 8px #0008;
+    }
+    .note {
+      display: flex; justify-content: center; align-items: center; gap: 18px;
+      margin: 72px auto 0; color: var(--muted); font-size: 12px;
+      letter-spacing: .12em; text-transform: uppercase;
+    }
+    .note::before, .note::after { content: ""; width: 48px; height: 1px; background: var(--line); }
+    .schedule {
+      max-width: 1240px; margin: 78px auto 0; padding-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+    .section-heading { text-align: center; margin-bottom: 24px; }
+    .section-heading .eyebrow { display: block; margin-bottom: 10px; }
+    .section-heading h2 {
+      margin: 0; font: 600 clamp(30px, 5vw, 48px)/1.1 "Playfair Display", Georgia, serif;
+      letter-spacing: -.03em;
+    }
+    .section-heading p { margin: 12px 0 0; color: var(--muted); font-size: 14px; }
+    .schedule-card {
+      padding: clamp(10px, 2vw, 22px); background: rgba(255,255,255,.56);
+      border: 1px solid var(--line); border-radius: 8px;
+      box-shadow: 0 18px 50px rgba(51, 41, 26, .08);
+    }
+    .schedule-card img {
+      display: block; width: 100%; height: auto; border-radius: 4px;
+    }
+    .schedule-caption {
+      margin: 14px 2px 0; display: flex; justify-content: space-between;
+      gap: 12px; flex-wrap: wrap; color: var(--muted); font-size: 12px;
+    }
+    .schedule-caption a { color: var(--accent); text-decoration: none; }
+    .schedule-caption a:hover { text-decoration: underline; }
+    .countdown {
+      max-width: 1040px; margin: 76px auto 0; padding: 38px 28px 34px;
+      text-align: center; border: 1px solid rgba(183,123,66,.42);
+      border-radius: 12px; background:
+        radial-gradient(circle at 50% 0%, rgba(183,123,66,.13), transparent 58%),
+        rgba(255,255,255,.48);
+      box-shadow: 0 18px 50px rgba(51, 41, 26, .07);
+    }
+    .countdown .eyebrow { display: block; margin-bottom: 12px; }
+    .countdown h2 {
+      margin: 0; font: 600 clamp(28px, 4.8vw, 48px)/1.15 "Playfair Display", Georgia, serif;
+      letter-spacing: -.025em;
+    }
+    .countdown-subtitle { margin: 12px 0 26px; color: var(--muted); font-size: 14px; }
+    .countdown-grid {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px; max-width: 720px; margin: 0 auto;
+    }
+    .countdown-unit {
+      padding: 18px 10px 15px; border: 1px solid var(--line);
+      border-radius: 8px; background: rgba(255,255,255,.66);
+    }
+    .countdown-number {
+      display: block; color: var(--accent);
+      font: 600 clamp(34px, 6vw, 64px)/1 "Playfair Display", Georgia, serif;
+      font-variant-numeric: tabular-nums;
+    }
+    .countdown-label {
+      display: block; margin-top: 9px; color: var(--muted);
+      font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+    }
+    .countdown-date {
+      margin: 22px 0 0; color: var(--muted); font-size: 12px;
+      letter-spacing: .12em;
+    }
+    .countdown-quote {
+      margin: 24px 0 0; color: #8b623e;
+      font: italic 16px "Playfair Display", Georgia, serif;
+    }
+
+    /* Galaxy / class members */
+    .galaxy-section {
+      position: relative; isolation: isolate; overflow: hidden;
+      max-width: 1440px; margin: 82px auto 0; padding: 58px clamp(14px, 3vw, 34px) 34px;
+      color: #f8f3e7; border: 1px solid rgba(219,190,123,.25); border-radius: 18px;
+      background: radial-gradient(ellipse at 50% 80%, #26304b 0%, #111827 42%, #080c16 82%);
+      box-shadow: 0 28px 80px rgba(15,20,35,.22);
+    }
+    .galaxy-section::before, .galaxy-section::after {
+      content:""; position:absolute; z-index:-1; border-radius:50%; pointer-events:none;
+      background: radial-gradient(circle, rgba(255,226,166,.13), transparent 68%);
+    }
+    .galaxy-section::before { width:420px; height:420px; left:-180px; top:20%; }
+    .galaxy-section::after { width:520px; height:520px; right:-230px; bottom:-250px; }
+    .galaxy-heading { text-align:center; position:relative; z-index:2; }
+    .galaxy-heading .eyebrow { color:#e5c77b; }
+    .galaxy-heading h2 {
+      margin:12px 0 10px; color:#fff8e8;
+      font:600 clamp(30px,5vw,54px)/1.1 "Playfair Display",Georgia,serif;
+      letter-spacing:-.035em;
+    }
+    .galaxy-heading p { margin:0; color:#c5c7d1; font:italic 15px "Playfair Display",Georgia,serif; }
+    .galaxy-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:9px; margin:22px 0 8px; }
+    .galaxy-pill {
+      border:1px solid rgba(255,255,255,.18); border-radius:999px; padding:9px 15px;
+      color:#e9e8ed; background:rgba(255,255,255,.07); font:600 12px "DM Sans",sans-serif;
+      cursor:pointer; transition:.2s ease;
+    }
+    .galaxy-pill:hover,.galaxy-pill.active { color:#241b0c; background:#f1d99b; border-color:#f1d99b; }
+    .galaxy-stage {
+      position:relative; height:clamp(340px,52vw,570px); max-height:620px; margin:8px auto 0;
+      overflow:hidden; border-radius:14px; touch-action:pan-y;
+    }
+    .galaxy-canvas { position:absolute; inset:0; width:100%; height:100%; }
+    .star-layer { position:absolute; inset:0; }
+    .star-button {
+      position:absolute; left:var(--x); top:var(--y); width:var(--size); height:var(--size);
+      transform:translate(-50%,-50%); border:0; border-radius:50%; padding:0; cursor:pointer;
+      background:radial-gradient(circle at 38% 34%, #fff 0 13%, var(--star-color) 34%, color-mix(in srgb, var(--star-color), transparent 75%) 68%, transparent 74%);
+      box-shadow:0 0 9px 2px var(--star-color), 0 0 22px 5px color-mix(in srgb, var(--star-color), transparent 45%);
+      opacity:.92; transition:transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+      animation:starPulse var(--pulse,3.4s) ease-in-out infinite alternate; animation-delay:var(--delay,0s);
+    }
+    .star-button:hover,.star-button:focus-visible,.star-button.selected { z-index:5; opacity:1; transform:translate(-50%,-50%) scale(1.65); outline:2px solid rgba(255,239,193,.9); outline-offset:5px; }
+    .star-button.featured { z-index:4; width:24px; height:24px; --star-color:#ffd56c; box-shadow:0 0 15px 5px #ffd56c,0 0 42px 14px #d99a3b99; }
+    .star-button.featured::after { content:"✦"; position:absolute; inset:-24px; display:grid; place-items:center; color:#ffe6a1; font-size:48px; text-shadow:0 0 20px #ffce62; opacity:.55; pointer-events:none; }
+    @keyframes starPulse { from { filter:brightness(.82); } to { filter:brightness(1.28); } }
+    .star-tooltip {
+      position:absolute; left:50%; bottom:18px; transform:translateX(-50%); z-index:6;
+      width:min(390px,calc(100% - 24px)); padding:18px 20px; text-align:center;
+      border:1px solid rgba(232,202,139,.4); border-radius:14px;
+      background:rgba(8,12,22,.88); backdrop-filter:blur(14px); box-shadow:0 14px 50px #0007;
+    }
+    .star-tooltip small { display:block; color:#d7b96e; letter-spacing:.2em; text-transform:uppercase; font-size:9px; }
+    .star-tooltip strong { display:block; margin-top:7px; color:#fff7e5; font:600 22px "Playfair Display",Georgia,serif; }
+    .star-tooltip p { margin:7px 0 0; color:#c2c4cf; font-size:12px; }
+    .star-tooltip .close-star { position:absolute; right:10px; top:8px; border:0; color:#d5d5dc; background:transparent; font-size:19px; cursor:pointer; }
+    .member-panel {
+      max-width:980px; margin:22px auto 0; padding:18px; border:1px solid rgba(255,255,255,.13);
+      border-radius:13px; background:rgba(255,255,255,.055);
+    }
+    .member-panel[hidden] { display:none; }
+    .member-tools { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+    .member-tools label { color:#eee6d6; font:600 14px "Playfair Display",Georgia,serif; }
+    .member-search { min-width:min(100%,230px); padding:10px 13px; color:#fff; background:#ffffff0c; border:1px solid #ffffff2c; border-radius:8px; outline:none; }
+    .member-search:focus { border-color:#e5c77b; }
+    .member-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; max-height:300px; overflow:auto; padding-right:4px; }
+    .member-item { display:flex; align-items:center; gap:9px; min-width:0; padding:10px 11px; border:1px solid #ffffff12; border-radius:8px; color:#e7e5e8; background:#ffffff08; text-align:left; cursor:pointer; font:12px "DM Sans",sans-serif; }
+    .member-item:hover,.member-item.is-featured { border-color:#d8b96888; background:#d8b96818; color:#ffe6a8; }
+    .member-item span:first-child { color:#d6bd7c; font-size:10px; min-width:20px; }
+    .member-item span:last-child { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .galaxy-footnote { text-align:center; margin:18px 0 0; color:#aeb2c0; font-size:11px; letter-spacing:.06em; }
+    @media(max-width:700px) {
+      .galaxy-section { margin-top:56px; padding:38px 10px 24px; border-radius:12px; }
+      .galaxy-stage { height:420px; }
+      .member-panel { padding:12px; }
+      .member-list { grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+      .member-item { padding:9px 7px; font-size:10px; }
+      .star-tooltip { bottom:12px; padding:14px; }
+      .star-tooltip strong { font-size:19px; }
+    }
+    @media(prefers-reduced-motion:reduce) { .star-button { animation:none; } }
+
+    footer {
+      max-width: 1440px; margin: 30px auto 0; padding-top: 18px;
+      border-top: 1px solid var(--line); display: flex;
+      justify-content: space-between; color: var(--muted); font-size: 11px;
+      letter-spacing: .08em;
+    }
+    .fade { animation: rise .9s both; }
+    .fade.delay { animation-delay: .16s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 700px) {
+      .page { padding: 18px 15px 24px; }
+      .topline { font-size: 9px; letter-spacing: .1em; }
+      .intro { padding: 54px 4px 30px; }
+      .photos { grid-template-columns: 1fr; gap: 16px; }
+      .photo:first-child { transform: none; }
+      .photo img { height: auto; aspect-ratio: 4 / 3; }
+      .note { margin-top: 38px; gap: 10px; font-size: 9px; }
+      .schedule { margin-top: 54px; padding-top: 26px; }
+      .countdown { margin-top: 54px; padding: 28px 14px 25px; }
+      .countdown-grid { gap: 7px; }
+      .countdown-unit { padding: 14px 5px 12px; }
+      .countdown-label { font-size: 8px; letter-spacing: .1em; }
+      .countdown-subtitle { font-size: 12px; line-height: 1.6; }
+      .countdown-quote { font-size: 14px; line-height: 1.6; }
+      .section-heading p { font-size: 12px; line-height: 1.6; }
+      .schedule-caption { font-size: 10px; }
+      footer { gap: 12px; flex-wrap: wrap; font-size: 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topline">
+      <strong>Album thanh xuân</strong>
+      <span><a href="#ngoi-sao" style="color:inherit;text-decoration:none">Ngôi sao 12A3 ↓</a>　·　<a href="#dem-nguoc" style="color:inherit;text-decoration:none">Đếm ngược</a>　·　<a href="#thoi-khoa-bieu" style="color:inherit;text-decoration:none">Thời khóa biểu</a>　·　2026</span>
+    </div>
+
+    <section class="hero">
+      <header class="intro fade">
+        <div class="eyebrow">The days we'll remember</div>
+        <h1>12A3</h1>
+        <div class="school">Trường THPT Ba Vì</div>
+        <p class="slogan">“Thanh xuân của chúng ta”</p>
+      </header>
+
+      <section class="photos fade delay" aria-label="Ảnh tập thể lớp 12A3">
+        <figure class="photo">
+          <img src="assets/lop-12a3-tot-nghiep.jpg" alt="Tập thể lớp 12A3 trong lễ tốt nghiệp">
+          <figcaption class="photo-label">Một chặng đường đáng nhớ</figcaption>
+        </figure>
+        <figure class="photo">
+          <img src="assets/lop-12a3-san-truong.jpg" alt="Tập thể lớp 12A3 tại sân trường">
+          <figcaption class="photo-label">Những ngày bên nhau</figcaption>
+        </figure>
+      </section>
+
+      <div class="note">Together · Forever in our memories</div>
+    </section>
+
+
+    <section class="galaxy-section fade delay" id="ngoi-sao" aria-labelledby="galaxy-title">
+      <header class="galaxy-heading">
+        <span class="eyebrow">✦ Our little universe · 2026–2027</span>
+        <h2 id="galaxy-title">Những Ngôi Sao Của 12A3</h2>
+        <p>“Mỗi người một ánh sáng, cùng nhau tạo nên bầu trời ký ức.”</p>
+        <div class="galaxy-actions">
+          <button class="galaxy-pill active" id="show-galaxy" type="button">✧ Bầu trời 3D · 43 vì sao</button>
+          <button class="galaxy-pill" id="show-members" type="button">♧ Hồ sơ thành viên</button>
+        </div>
+      </header>
+      <div class="galaxy-stage" id="galaxy-stage" aria-label="Bầu trời gồm 43 ngôi sao đại diện cho các thành viên lớp 12A3">
+        <canvas class="galaxy-canvas" id="galaxy-canvas" aria-hidden="true"></canvas>
+        <div class="star-layer" id="star-layer"></div>
+        <div class="star-tooltip" id="star-tooltip" hidden aria-live="polite">
+          <button class="close-star" id="close-star" type="button" aria-label="Đóng">×</button>
+          <small id="star-kicker">Một vì sao của 12A3</small>
+          <strong id="star-name"></strong>
+          <p id="star-note">Mỗi người là một phần của thanh xuân này.</p>
+        </div>
+      </div>
+      <div class="member-panel" id="member-panel" hidden>
+        <div class="member-tools">
+          <label for="member-search">Danh sách thành viên · 43 người</label>
+          <input class="member-search" id="member-search" type="search" placeholder="Tìm tên thành viên..." autocomplete="off">
+        </div>
+        <div class="member-list" id="member-list"></div>
+      </div>
+      <p class="galaxy-footnote">CHẠM VÀO MỘT NGÔI SAO ĐỂ GẶP GỠ CHỦ NHÂN CỦA NÓ ✦</p>
+    </section>
+
+    <section class="countdown fade delay" id="dem-nguoc" aria-labelledby="countdown-title">
+      <span class="eyebrow">Thời gian lắng đọng</span>
+      <h2 id="countdown-title">Chặng cuối của 12A3</h2>
+      <p class="countdown-subtitle">Cùng đếm ngược đến Kỳ thi tốt nghiệp THPT Quốc gia 2027</p>
+      <div class="countdown-grid" role="timer" aria-live="off" aria-label="Thời gian còn lại đến ngày 11 tháng 6 năm 2027">
+        <div class="countdown-unit"><span class="countdown-number" id="days">---</span><span class="countdown-label">Ngày</span></div>
+        <div class="countdown-unit"><span class="countdown-number" id="hours">--</span><span class="countdown-label">Giờ</span></div>
+        <div class="countdown-unit"><span class="countdown-number" id="minutes">--</span><span class="countdown-label">Phút</span></div>
+        <div class="countdown-unit"><span class="countdown-number" id="seconds">--</span><span class="countdown-label">Giây</span></div>
+      </div>
+      <p class="countdown-date">MỤC TIÊU: 11 · 06 · 2027</p>
+      <p class="countdown-quote">“Cố thêm một chút nữa, rồi chúng ta sẽ nhớ cả những ngày áp lực này.”</p>
+    </section>
+
+    <section class="schedule fade delay" id="thoi-khoa-bieu" aria-labelledby="schedule-title">
+      <header class="section-heading">
+        <span class="eyebrow">Our school days</span>
+        <h2 id="schedule-title">Thời khóa biểu lớp 12A3</h2>
+        <p>Trường THPT Ba Vì · Năm học 2026–2027 · Học kỳ I</p>
+      </header>
+      <div class="schedule-card">
+        <a href="assets/tkb-12a3.png" target="_blank" rel="noopener" aria-label="Mở ảnh thời khóa biểu kích thước đầy đủ">
+          <img src="assets/tkb-12a3.png" alt="Thời khóa biểu lớp 12A3, TKB số 4, áp dụng từ ngày 02 tháng 11 năm 2026" loading="lazy">
+        </a>
+        <div class="schedule-caption">
+          <span>TKB số 4 · Áp dụng từ ngày 02/11/2026</span>
+          <a href="assets/tkb-12a3.png" target="_blank" rel="noopener">Mở ảnh kích thước đầy đủ ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>12A3 · THPT BA VÌ</span>
+      <span>Thanh xuân của chúng ta ♡</span>
+    </footer>
+  </main>
+
+  <script>
+
+    // 43 ngôi sao – thứ tự và tên theo danh sách lớp cung cấp.
+    const classmates = [
+      "Đỗ Đăng Khôi", "Đào Thị Minh Ánh", "Đinh Văn An", "Phùng Thế Anh", "Nguyễn Mạnh Đạt",
+      "Phùng Thế Minh Đức", "Khổng Thạch Anh Thư", "Nguyễn Khắc Thiện Nhân", "Trần Thế Thảo Nguyên",
+      "Lê Thị Thảo Ngân", "Thanh Thảo", "Phương Anh", "Đào Nhật Dương", "Nguyễn Thị Trang",
+      "Nguyễn Xuân Hải", "Nguyễn Việt Nam", "Nguyễn Viết Anh", "Nguyễn Lương Bằng", "Nguyễn Lâm Phúc",
+      "Nguyễn Hoàng Hải", "Nguyễn Hải Đăng", "Nguyễn Đình Quân", "Nguyễn Bảo Hân", "Ngọc Linh",
+      "Chu Phúc Nghĩa", "Lưu Quang Dụ", "Linh Chi", "Khánh Sơn", "Phan Thị Khánh Linh",
+      "Nguyễn Hữu Huy Vũ", "Huy Dũng", "Vũ Thị Hồng Hà", "Hồ Thị Phương Anh", "Hồ Thị Diệu",
+      "Kiều Gia Huy", "Hoàng Gia Huy", "Dương Minh Chiều", "Đức Long", "Đức Giang", "Đỗ Nhật Tuệ",
+      "Đinh Thị Thương", "Hà Anh Bảo", "Nguyễn Đức Hải"
+    ];
+    const starColors = ["#ffe8a3", "#a8e6dc", "#b9d5ff", "#ffd0e5", "#f6e7b0", "#b9efff", "#d5c6ff"];
+    const stage = document.getElementById("galaxy-stage");
+    const layer = document.getElementById("star-layer");
+    const canvas = document.getElementById("galaxy-canvas");
+    const ctx = canvas.getContext("2d");
+    const tooltip = document.getElementById("star-tooltip");
+    const memberPanel = document.getElementById("member-panel");
+    const memberList = document.getElementById("member-list");
+    const starButtons = [];
+    let starPositions = [];
+    let canvasWidth = 0, canvasHeight = 0, animationFrame;
+
+    function seeded(n) { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+    function buildGalaxy() {
+      const w = stage.clientWidth, h = stage.clientHeight;
+      canvasWidth = w; canvasHeight = h;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      layer.innerHTML = ""; starButtons.length = 0; starPositions = [];
+      classmates.forEach((name, i) => {
+        let x, y;
+        if (i === 0) { x = 50; y = 54; }
+        else {
+          const angle = (i - 1) * 2.3999632297;
+          const radius = 10 + Math.sqrt(i / 42) * 39;
+          x = Math.max(5, Math.min(95, 50 + Math.cos(angle) * radius * 1.48));
+          y = Math.max(12, Math.min(83, 53 + Math.sin(angle) * radius * .76));
+        }
+        const color = i === 0 ? "#ffd56c" : starColors[Math.floor(seeded(i + 2) * starColors.length)];
+        const size = i === 0 ? 24 : 8 + seeded(i + 9) * 8;
+        starPositions.push({ x:w*x/100, y:h*y/100, size, color, phase:seeded(i+19)*6.28 });
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "star-button" + (i === 0 ? " featured" : "");
+        b.style.setProperty("--x", x + "%"); b.style.setProperty("--y", y + "%");
+        b.style.setProperty("--size", size + "px"); b.style.setProperty("--star-color", color);
+        b.style.setProperty("--pulse", (2.4 + seeded(i+33)*2.5) + "s");
+        b.style.setProperty("--delay", (-seeded(i+50)*4) + "s");
+        b.setAttribute("aria-label", "Hiện thông tin: " + name);
+        b.title = name;
+        b.addEventListener("click", () => selectStar(i));
+        layer.appendChild(b); starButtons.push(b);
+      });
+      drawGalaxy();
+    }
+    function drawGalaxy() {
+      if (!ctx) return;
+      ctx.clearRect(0,0,canvasWidth,canvasHeight);
+      const cx=canvasWidth/2, cy=canvasHeight*.55;
+      // Những vòng quỹ đạo mảnh tạo cảm giác thiên hà.
+      ctx.save(); ctx.translate(cx,cy); ctx.strokeStyle="rgba(211,220,245,.19)"; ctx.lineWidth=1;
+      for(let r=1;r<=5;r++) { ctx.beginPath(); ctx.ellipse(0,0,canvasWidth*(.12+r*.075),canvasHeight*(.045+r*.035),-.05,0,Math.PI*2); ctx.stroke(); }
+      ctx.restore();
+      // Hạt bụi sao nền.
+      for(let i=0;i<155;i++) {
+        const x=seeded(i+101)*canvasWidth, y=seeded(i+301)*canvasHeight;
+        const alpha=.15+seeded(i+501)*.48, radius=.35+seeded(i+701)*1.1;
+        ctx.beginPath(); ctx.arc(x,y,radius,0,Math.PI*2); ctx.fillStyle=`rgba(224,231,255,${alpha})`; ctx.fill();
+      }
+      const t=Date.now()/1000;
+      starPositions.forEach((p,i)=>{
+        const pulse=.65+.35*Math.sin(t*1.3+p.phase);
+        const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.size*2.5);
+        g.addColorStop(0,p.color); g.addColorStop(.22,`rgba(255,255,255,${.35*pulse})`); g.addColorStop(1,"rgba(255,255,255,0)");
+        ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,p.size*2.5,0,Math.PI*2); ctx.fill();
+      });
+      animationFrame=requestAnimationFrame(drawGalaxy);
+    }
+    function selectStar(index) {
+      starButtons.forEach((b,i)=>b.classList.toggle("selected",i===index));
+      const isKhôi=index===0;
+      document.getElementById("star-kicker").textContent=isKhôi ? "✦ Ngôi sao nổi bật nhất ✦" : `Ngôi sao số ${index+1} · Thành viên 12A3`;
+      document.getElementById("star-name").textContent=classmates[index];
+      document.getElementById("star-note").textContent=isKhôi ? "Hãy Để Nơi Nổi Bật Nhất" : "Mỗi người là một phần của thanh xuân này.";
+      tooltip.hidden=false;
+    }
+    function renderMemberList(filter="") {
+      const q=filter.trim().toLocaleLowerCase("vi"); memberList.innerHTML="";
+      classmates.forEach((name,i)=>{
+        if(q && !name.toLocaleLowerCase("vi").includes(q)) return;
+        const b=document.createElement("button"); b.type="button";
+        b.className="member-item"+(i===0?" is-featured":"");
+        const num=document.createElement("span"); num.textContent=String(i+1).padStart(2,"0");
+        const label=document.createElement("span"); label.textContent=name;
+        b.append(num,label); b.addEventListener("click",()=>{ selectStar(i); memberPanel.hidden=true; document.getElementById("show-members").classList.remove("active"); document.getElementById("show-galaxy").classList.add("active"); stage.scrollIntoView({behavior:"smooth",block:"center"}); });
+        memberList.appendChild(b);
+      });
+      if(!memberList.children.length) { const empty=document.createElement("p"); empty.textContent="Không tìm thấy thành viên này."; empty.style.color="#c5c7d1"; memberList.appendChild(empty); }
+    }
+    document.getElementById("show-members").addEventListener("click",()=>{
+      memberPanel.hidden=!memberPanel.hidden;
+      document.getElementById("show-members").classList.toggle("active",!memberPanel.hidden);
+      document.getElementById("show-galaxy").classList.toggle("active",memberPanel.hidden);
+      if(!memberPanel.hidden) renderMemberList(document.getElementById("member-search").value);
+    });
+    document.getElementById("show-galaxy").addEventListener("click",()=>{
+      memberPanel.hidden=true; document.getElementById("show-members").classList.remove("active"); document.getElementById("show-galaxy").classList.add("active");
+    });
+    document.getElementById("member-search").addEventListener("input",e=>renderMemberList(e.target.value));
+    document.getElementById("close-star").addEventListener("click",()=>{tooltip.hidden=true;starButtons.forEach(b=>b.classList.remove("selected"));});
+    const resizeObserver = new ResizeObserver(()=>buildGalaxy()); resizeObserver.observe(stage);
+    buildGalaxy();
+
+    // Mốc đếm ngược theo ngày 11/06/2027 trong bản thiết kế trước.
+    // Giờ đích đặt là 00:00 theo múi giờ Việt Nam (UTC+7).
+    const examDate = new Date("2027-06-11T00:00:00+07:00").getTime();
+    const fields = {
+      days: document.getElementById("days"),
+      hours: document.getElementById("hours"),
+      minutes: document.getElementById("minutes"),
+      seconds: document.getElementById("seconds")
+    };
+
+    function updateCountdown() {
+      const remaining = examDate - Date.now();
+
+      if (remaining <= 0) {
+        fields.days.textContent = "00";
+        fields.hours.textContent = "00";
+        fields.minutes.textContent = "00";
+        fields.seconds.textContent = "00";
+        document.querySelector(".countdown-subtitle").textContent =
+          "Chúc 12A3 thật bình tĩnh và tự tin!";
+        return;
+      }
+
+      const totalSeconds = Math.floor(remaining / 1000);
+      fields.days.textContent = Math.floor(totalSeconds / 86400);
+      fields.hours.textContent = String(Math.floor((totalSeconds % 86400) / 3600)).padStart(2, "0");
+      fields.minutes.textContent = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+      fields.seconds.textContent = String(totalSeconds % 60).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
